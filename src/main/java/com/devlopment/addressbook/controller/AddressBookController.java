@@ -25,8 +25,18 @@ public class AddressBookController {
         AddressResponse addressResponse = new AddressResponse("Get call Successes",addressData);
         return addressResponse;
     }
-
-
-
+    @PutMapping("/addressbookservice/{id}")
+    public AddressResponse updateAddress(@PathVariable ("id") int id,@RequestBody AddressDTO addressDTO){
+        AddressData addressData = addressBookService.updateAddress(id, addressDTO);
+        AddressResponse addressResponse = new AddressResponse("Updated Address",addressData);
+        return addressResponse;
+    }
+    @DeleteMapping("/addressbookservice/{id}")
+    public AddressResponse deleteAddress(@PathVariable ("id")int id)
+    {
+        AddressData addressData = addressBookService.deleteAddress(id);
+        AddressResponse addressResponse = new AddressResponse("Deleted Address",addressData);
+        return addressResponse;
+    }
 }
 

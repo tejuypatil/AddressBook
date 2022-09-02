@@ -23,6 +23,19 @@ public class AddressBookService {
         return addressData;
     }
 
+    public AddressData updateAddress(int id,AddressDTO addressDTO){
+        Optional<AddressData>addressDataOptional = addressBookRepository.findById(id);
+        AddressData addressData =addressDataOptional.get();
+        addressData.setFirstName(addressDTO.firstName);
+        addressData.setLastName(addressDTO.lastName);
+        addressBookRepository.save(addressData);
+        return addressData;
+    }
+
+    public AddressData deleteAddress(int id){
+        addressBookRepository.deleteById(id);
+        return null;
+    }
 
 }
 

@@ -8,4 +8,5 @@ public class AddressDTO {
         this.firstName = firstName;
         this.lastName = lastName;
     }
+
 }
