@@ -7,6 +7,8 @@ import com.devlopment.addressbook.service.AddressBookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 public class AddressBookController {
 
@@ -14,7 +16,7 @@ public class AddressBookController {
     AddressBookService addressBookService;
 
     @PostMapping("/addressbookservice")
-    public AddressResponse createAddress(@RequestBody AddressDTO addressDTO){
+    public AddressResponse createAddress(@Valid @RequestBody AddressDTO addressDTO){
         AddressData addressData= addressBookService.createAddress(addressDTO);
         AddressResponse addressResponse = new AddressResponse("Create successful",addressData);
         return addressResponse;
@@ -26,7 +28,7 @@ public class AddressBookController {
         return addressResponse;
     }
     @PutMapping("/addressbookservice/{id}")
-    public AddressResponse updateAddress(@PathVariable ("id") int id,@RequestBody AddressDTO addressDTO){
+    public AddressResponse updateAddress(@PathVariable ("id") int id,@Valid@RequestBody AddressDTO addressDTO){
         AddressData addressData = addressBookService.updateAddress(id, addressDTO);
         AddressResponse addressResponse = new AddressResponse("Updated Address",addressData);
         return addressResponse;
