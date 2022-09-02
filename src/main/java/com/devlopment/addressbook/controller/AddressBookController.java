@@ -1,6 +1,7 @@
 package com.devlopment.addressbook.controller;
 
 import com.devlopment.addressbook.DTO.AddressDTO;
+import com.devlopment.addressbook.DTO.AddressResponse;
 import com.devlopment.addressbook.model.AddressData;
 import com.devlopment.addressbook.service.AddressBookService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +17,10 @@ public class AddressBookController {
     AddressBookService addressBookService;
 
     @PostMapping("/addressbookservice")
-    public AddressData createAddress(@RequestBody AddressDTO addressDTO){
+    public AddressResponse createAddress(@RequestBody AddressDTO addressDTO){
        AddressData addressData= addressBookService.createAddress(addressDTO);
-        return addressData;
+        AddressResponse addressResponse = new AddressResponse("Create successful",addressData);
+        return addressResponse;
     }
 
 

@@ -29,7 +29,7 @@ public class AddressData {
     public AddressData(AddressDTO addressBookDTO) {
 
         this.firstName= addressBookDTO.firstName;
-        this.lastName= addressBookDTO.lastname;
+        this.lastName= addressBookDTO.lastName;
     }
 
     public AddressData() {

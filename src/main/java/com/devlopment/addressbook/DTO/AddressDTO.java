@@ -2,10 +2,10 @@ package com.devlopment.addressbook.DTO;
 
 public class AddressDTO {
     public  String firstName;
-    public String lastname;
+    public String lastName;
 
-    public AddressDTO(String firstName, String lastname) {
+    public AddressDTO(String firstName, String lastName) {
         this.firstName = firstName;
-        this.lastname = lastname;
+        this.lastName = lastName;
     }
 }

@@ -13,9 +13,9 @@ public class AddressBookService {
 
     public AddressData createAddress(AddressDTO addressDTO){
         AddressData addressData = new AddressData(addressDTO);
-        addressBookRepository.save(addressData);
-        return addressData;
+        return addressBookRepository.save(addressData);
     }
+
 
 
 }
