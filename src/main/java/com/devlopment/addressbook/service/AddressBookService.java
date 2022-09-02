@@ -6,6 +6,8 @@ import com.devlopment.addressbook.repository.AddressBookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class AddressBookService {
     @Autowired
@@ -15,7 +17,11 @@ public class AddressBookService {
         AddressData addressData = new AddressData(addressDTO);
         return addressBookRepository.save(addressData);
     }
-
+    public AddressData getAddress(int id){
+        Optional<AddressData> addressDataOptional= addressBookRepository.findById(id);
+        AddressData addressData = addressDataOptional.get();
+        return addressData;
+    }
 
 
 }
