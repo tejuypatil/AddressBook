@@ -7,7 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class AddressData {
+public class Contact {
     public String firstName;
     public String lastName;
     public int phoneNumber;
@@ -17,7 +17,7 @@ public class AddressData {
     @GeneratedValue
     public int userId;
 
-    public AddressData(String firstName, String lastName, int phoneNumber, String email, String address, int userId) {
+    public Contact(String firstName, String lastName, int phoneNumber, String email, String address, int userId) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
@@ -26,13 +26,13 @@ public class AddressData {
         this.userId = userId;
     }
 
-    public AddressData(AddressDTO addressBookDTO) {
+    public Contact(AddressDTO addressBookDTO) {
 
         this.firstName= addressBookDTO.firstName;
         this.lastName= addressBookDTO.lastName;
     }
 
-    public AddressData() {
+    public Contact() {
 
     }
 
