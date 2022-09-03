@@ -2,9 +2,8 @@ package com.devlopment.addressbook.model;
 
 import com.devlopment.addressbook.DTO.AddressDTO;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Contact {
@@ -12,24 +11,22 @@ public class Contact {
     public String lastName;
     public int phoneNumber;
     public String email;
-    public String address;
+
+    @ElementCollection
+    @CollectionTable(name = "addresses", joinColumns = @JoinColumn(name = "id"))
+    public List<String> addresses;
+
     @Id
-    @GeneratedValue
+    @GeneratedValue (strategy = GenerationType.AUTO)
     public int userId;
 
-    public Contact(String firstName, String lastName, int phoneNumber, String email, String address, int userId) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.phoneNumber = phoneNumber;
-        this.email = email;
-        this.address = address;
-        this.userId = userId;
-    }
+
 
     public Contact(AddressDTO addressBookDTO) {
 
         this.firstName= addressBookDTO.firstName;
         this.lastName= addressBookDTO.lastName;
+        this.addresses= addressBookDTO.addresses;
     }
 
     public Contact() {
