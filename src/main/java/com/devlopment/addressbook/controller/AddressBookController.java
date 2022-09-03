@@ -5,6 +5,8 @@ import com.devlopment.addressbook.DTO.AddressResponse;
 import com.devlopment.addressbook.model.AddressData;
 import com.devlopment.addressbook.service.AddressBookService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -16,29 +18,33 @@ public class AddressBookController {
     AddressBookService addressBookService;
 
     @PostMapping("/addressbookservice")
-    public AddressResponse createAddress(@Valid @RequestBody AddressDTO addressDTO){
+    public ResponseEntity <AddressResponse> createAddress(@Valid @RequestBody AddressDTO addressDTO){
         AddressData addressData= addressBookService.createAddress(addressDTO);
         AddressResponse addressResponse = new AddressResponse("Create successful",addressData);
-        return addressResponse;
+        ResponseEntity<AddressResponse> response = new ResponseEntity<>(addressResponse, HttpStatus.OK);
+        return response;
     }
     @GetMapping("/addressbookservice/{id}")
-    public AddressResponse getAddress(@PathVariable ("id") int id){
+    public ResponseEntity <AddressResponse> getAddress(@PathVariable ("id") int id){
         AddressData addressData = addressBookService.getAddress(id);
         AddressResponse addressResponse = new AddressResponse("Get call Successes",addressData);
-        return addressResponse;
+        ResponseEntity<AddressResponse> response = new ResponseEntity<>(addressResponse, HttpStatus.OK);
+        return response;
     }
     @PutMapping("/addressbookservice/{id}")
-    public AddressResponse updateAddress(@PathVariable ("id") int id,@Valid@RequestBody AddressDTO addressDTO){
+    public ResponseEntity <AddressResponse> updateAddress(@PathVariable ("id") int id,@Valid@RequestBody AddressDTO addressDTO){
         AddressData addressData = addressBookService.updateAddress(id, addressDTO);
         AddressResponse addressResponse = new AddressResponse("Updated Address",addressData);
-        return addressResponse;
+        ResponseEntity<AddressResponse> response = new ResponseEntity<>(addressResponse, HttpStatus.OK);
+        return response;
     }
     @DeleteMapping("/addressbookservice/{id}")
-    public AddressResponse deleteAddress(@PathVariable ("id")int id)
+    public ResponseEntity <AddressResponse> deleteAddress(@PathVariable ("id")int id)
     {
         AddressData addressData = addressBookService.deleteAddress(id);
         AddressResponse addressResponse = new AddressResponse("Deleted Address",addressData);
-        return addressResponse;
+        ResponseEntity<AddressResponse> response = new ResponseEntity<>(addressResponse, HttpStatus.OK);
+        return response;
     }
 }
 
