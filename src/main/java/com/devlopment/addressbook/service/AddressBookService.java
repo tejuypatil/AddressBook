@@ -1,11 +1,13 @@
 package com.devlopment.addressbook.service;
 
 import com.devlopment.addressbook.DTO.AddressDTO;
+import com.devlopment.addressbook.exception.ContactNotFoundException;
 import com.devlopment.addressbook.model.Contact;
 import com.devlopment.addressbook.repository.AddressBookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -18,9 +20,17 @@ public class AddressBookService {
         return addressBookRepository.save(addressData);
     }
     public Contact getAddress(int id){
-        Optional<Contact> addressDataOptional= addressBookRepository.findById(id);
-        Contact addressData = addressDataOptional.get();
-        return addressData;
+        try {
+            Optional<Contact> addressDataOptional = addressBookRepository.findById(id);
+            Contact contact = addressDataOptional.get();
+            return contact;
+
+        }
+        catch (NoSuchElementException e)
+        {
+            throw new ContactNotFoundException(id);
+        }
+
     }
 
     public Contact updateAddress(int id, AddressDTO addressDTO){

@@ -12,8 +12,7 @@ public class AddressDTO {
 
     public List<String> addresses;
 
+
     public AddressDTO() {
-
     }
-
 }
