@@ -5,6 +5,7 @@ import com.devlopment.addressbook.exception.ContactNotFoundException;
 import com.devlopment.addressbook.model.Contact;
 import com.devlopment.addressbook.repository.AddressBookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.NoSuchElementException;
@@ -26,25 +27,34 @@ public class AddressBookService {
             return contact;
 
         }
-        catch (NoSuchElementException e)
+        catch (NoSuchElementException exception)
         {
             throw new ContactNotFoundException(id);
         }
 
     }
 
-    public Contact updateAddress(int id, AddressDTO addressDTO){
-        Optional<Contact>addressDataOptional = addressBookRepository.findById(id);
-        Contact addressData =addressDataOptional.get();
-        addressData.setFirstName(addressDTO.firstName);
-        addressData.setLastName(addressDTO.lastName);
-        addressBookRepository.save(addressData);
-        return addressData;
+    public Contact updateAddress(int id, AddressDTO addressDTO) {
+        try {
+            Optional<Contact> addressDataOptional = addressBookRepository.findById(id);
+            Contact addressData = addressDataOptional.get();
+            addressData.setFirstName(addressDTO.firstName);
+            addressData.setLastName(addressDTO.lastName);
+            addressBookRepository.save(addressData);
+            return addressData;
+        }
+        catch (NoSuchElementException exception)
+        {
+            throw new ContactNotFoundException(id);
+        }
     }
-
-    public Contact deleteAddress(int id){
-        addressBookRepository.deleteById(id);
-        return null;
+    public Contact deleteAddress(int id) {
+        try {
+            addressBookRepository.deleteById(id);
+            return null;
+        } catch (EmptyResultDataAccessException exception) {
+            throw new ContactNotFoundException(id);
+        }
     }
 
 }
